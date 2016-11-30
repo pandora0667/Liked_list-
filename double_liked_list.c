@@ -25,14 +25,15 @@ int main()
 	char command[SIZE], name[SIZE], address[SIZE], message[SIZE];
 	int age; 
 
-	printf("Input Command !! ( add, delete, print, end)  : ");
-	scanf("%s", command);
-
 	introduce(); 
 
-	while( strcmp(command, "end") )
+	while(1)
 	{
-		if( !strcmp(command, "add" ) ) 
+
+		printf("\nInput Command !! ( add, delete, print, end)  : ");
+		scanf("%s", command);
+
+		if( !strcmp(command, "add") ) 
 		{
 			printf("Input name, message, address \n ->"); 
 			scanf("%s %s %s", name, message, address);
@@ -42,15 +43,13 @@ int main()
 			delete(); */
 		else if( !strcmp(command, "print") )
 			print(&head); 
-/*		else if( !strcmp(command, "end") ) 
+		else if( !strcmp(command, "end") ) 
 		{
-			printf("Good By~!!"); 
+			printf("Good By~!!\n\n"); 
 			exit(1); 
-		}*/
+		}
 		else 
-			printf(" Retry~!! \n\n"); 
-	
-	system("clear"); 
+			printf(" Retry~!! \n\n");  
 	}
 
 //	free();
@@ -61,7 +60,6 @@ int main()
 void introduce()
 {
 	printf("\n\n\t ---------- Double Linked List Example V.1.0 ----------\n\n");
-
 }
 
 void add(USER **head, USER **tail, char *message, char *name, char *address)
@@ -74,18 +72,19 @@ void add(USER **head, USER **tail, char *message, char *name, char *address)
 		exit(1);
 	}
 
-	if( *head == NULL) 
+	if( (*head) == NULL) 
 	{
-		*head = addUser; 
-		*tail = addUser; 
+		(*head) = addUser; 
+		(*tail) = addUser; 
 		addUser -> link = addUser -> prev = NULL; 
 		addUser -> message = (char *)malloc(SIZE);
 		addUser -> address = (char *)malloc(SIZE);
 	}
 	else 
 	{
-		*tail -> link = addUser;
-		*tail -> prev = tail;
+		(*tail) -> link = addUser;
+		(*tail) -> prev = (*tail);
+		(*tail) = addUser;
 		addUser -> message = (char *)malloc(SIZE);
 		addUser -> address = (char *)malloc(SIZE);
 	}
@@ -102,11 +101,11 @@ void delete()
 */
 void print(USER **head)
 {
-	USER tmp; 
-	tmp = *head; 
+	USER *tmp; 
+	tmp = (*head); 
 
-	printf("\n\n"); 
 	system("clear"); 
+	printf("\n\n"); 
 
 	while( tmp != NULL)
 	{
